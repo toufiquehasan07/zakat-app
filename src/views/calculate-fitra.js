@@ -3,13 +3,23 @@ import {SafeAreaView, StyleSheet, Text, Touchable, View} from 'react-native';
 import {TextInput} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const CalculateFitra = () => {
+const CalculateFitra = ({route}) => {
+  let item = {
+    id: 6,
+    title: 'চাল',
+  };
+  if (typeof route.params != 'undefined') {
+    item = route.params.item;
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.contents}>
         <View style={styles.inputGroup}>
           <Text style={styles.label}>
-            আপনার নির্বাচিত খাদ্য দ্রব্যের ১ কাজির মূল্য নিচের ঘরে লিখুন?
+            {/* আপনার নিকটস্থ বাজার মূল্য অনুযায়ী ১ কেজি {item.title} এর মূল্য নিচের
+            ঘরে লিখুন? */}
+            আপনার নির্বাচিত খাদ্য দ্রব্যের ১ কেজির মূল্য নিচের ঘরে লিখুন।
           </Text>
           <View>
             <TextInput style={styles.input} keyboardType="numeric" />
@@ -41,6 +51,7 @@ const styles = StyleSheet.create({
   contents: {
     alignItems: 'center',
     marginTop: '20%',
+    padding: 10,
   },
   inputGroup: {
     marginVertical: 10,

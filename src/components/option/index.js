@@ -1,9 +1,12 @@
 import React from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {CALCULATE_FITRA_VIEW} from '../../constants';
 
-const Option = ({item}) => {
+const Option = ({item, navigation}) => {
   return (
-    <TouchableOpacity style={styles.option} onPress={() => console.log('Ok')}>
+    <TouchableOpacity
+      style={styles.option}
+      onPress={() => navigation.navigate(CALCULATE_FITRA_VIEW, {item})}>
       <Text style={styles.itemName}>{item.title}</Text>
     </TouchableOpacity>
   );

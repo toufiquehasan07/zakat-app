@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
 import Option from '../components/option';
+import {useNavigation} from '@react-navigation/native';
 
 const DATA = [
   {
@@ -30,6 +31,8 @@ const DATA = [
 ];
 
 const Home = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.contents}>
@@ -42,7 +45,9 @@ const Home = () => {
         <FlatList
           data={DATA}
           numColumns={2}
-          renderItem={({item}) => <Option item={item} />}
+          renderItem={({item}) => (
+            <Option item={item} navigation={navigation} />
+          )}
         />
       </View>
     </View>
