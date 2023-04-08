@@ -1,40 +1,72 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, Touchable, View} from 'react-native';
+import {
+  Alert,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {TextInput} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {PRODUCTS, RESULT} from '../constants';
 
-const CalculateFitra = ({route}) => {
-  let item = {
-    id: 6,
-    title: 'চাল',
-  };
+const CalculateFitra = ({route, navigation}) => {
+  let item = PRODUCTS[0]; // default  item is first item of the product list;
   if (typeof route.params != 'undefined') {
     item = route.params.item;
   }
+
+  const [perKgPrice, setPerKgPrice] = React.useState(0);
+  // const [result, setResult] = React.useState(0);
+  const [noOfPerson, setNoOfPerson] = React.useState(0);
+
+  const calculateFitra = (unitPrice, noOfPerson) => {
+    if (noOfPerson == 0 || unitPrice == 0) {
+      Alert.alert('দুঃখিত', 'সকল ফর্ম পূরণ করে পুনরায় চেষ্টা করুন।');
+      return;
+    }
+    const {saaAmount} = item;
+    const result = noOfPerson * unitPrice * saaAmount;
+    navigation.navigate(RESULT, {
+      item,
+      result,
+      noOfPerson,
+    });
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.contents}>
         <View style={styles.inputGroup}>
           <Text style={styles.label}>
-            {/* আপনার নিকটস্থ বাজার মূল্য অনুযায়ী ১ কেজি {item.title} এর মূল্য নিচের
-            ঘরে লিখুন? */}
             আপনার নির্বাচিত খাদ্য দ্রব্যের ১ কেজির মূল্য নিচের ঘরে লিখুন।
           </Text>
           <View>
-            <TextInput style={styles.input} keyboardType="numeric" />
+            <TextInput
+              onChangeText={val => setPerKgPrice(val)}
+              style={styles.input}
+              keyboardType="numeric"
+              placeholder="0.0"
+            />
           </View>
         </View>
 
         <View style={styles.inputGroup}>
           <Text style={styles.label}>কত জনের ফিতরা দিতে চান?</Text>
           <View>
-            <TextInput style={styles.input} keyboardType="numeric" />
+            <TextInput
+              onChangeText={val => setNoOfPerson(val)}
+              style={styles.input}
+              keyboardType="numeric"
+              placeholder="0"
+            />
           </View>
         </View>
 
         <View style={styles.inputGroup}>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => calculateFitra(perKgPrice, noOfPerson)}>
             <Text style={styles.btnText}>হিসাব</Text>
           </TouchableOpacity>
         </View>
@@ -73,6 +105,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 10,
     borderRadius: 20,
+    color: '#000',
+    fontWeight: 'bold',
+    fontSize: 20,
   },
   btn: {
     width: 150,
