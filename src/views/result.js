@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 
-const GeneralAsk = () => {
+const Result = () => {
   return (
     <View style={styles.container}>
       <View style={styles.contents}>
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-export default GeneralAsk;
+export default Result;

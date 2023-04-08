@@ -1,6 +1,7 @@
 export const CALCULATE_FITRA_VIEW = 'ফিতরা হিসাব';
 export const HOME_VIEW = 'হোম';
-export const RESULT = 'সাধারণ জিজ্ঞাসা';
+export const RESULT = 'ফলাফল';
+
 export const PRODUCTS = [
   {
     id: 1,
