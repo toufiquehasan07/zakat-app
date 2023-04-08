@@ -1,34 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, FlatList, ScrollView} from 'react-native';
 import Option from '../components/option';
 import {useNavigation} from '@react-navigation/native';
-
-const DATA = [
-  {
-    id: 1,
-    title: 'খেজুর',
-  },
-  {
-    id: 2,
-    title: 'কিসমিস',
-  },
-  {
-    id: 3,
-    title: 'গম/আটা',
-  },
-  {
-    id: 4,
-    title: 'যব',
-  },
-  {
-    id: 5,
-    title: 'পনির',
-  },
-  {
-    id: 6,
-    title: 'চাল',
-  },
-];
+import {PRODUCTS} from '../constants';
 
 const Home = () => {
   const navigation = useNavigation();
@@ -43,7 +17,7 @@ const Home = () => {
           </Text>
         </View>
         <FlatList
-          data={DATA}
+          data={PRODUCTS}
           numColumns={2}
           renderItem={({item}) => (
             <Option item={item} navigation={navigation} />
